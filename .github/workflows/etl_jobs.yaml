@@ -1,0 +1,30 @@
+name: ETL Pipeline
+on:
+  schedule:
+   -cron: '0 0 * * *' # Runs every day at midnight
+  workflow_dispatch: # Allows manual trigger of the workflow      
+
+jobs:    
+  ETL-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Library installation
+        run: pip install pandas requests datetime
+
+      - name: Run the script
+        run: python app.py
+
+      - name: Publish files to github repo
+        uses: mikeal/publish-to-github-action@master
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           BRANCH_NAME: main
+         
