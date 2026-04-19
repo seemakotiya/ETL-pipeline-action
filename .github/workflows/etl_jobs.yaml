@@ -1,8 +1,8 @@
 name: ETL Pipeline
 on:
   schedule:
-   -cron: '0 0 * * *' # Runs every day at midnight
-  workflow_dispatch: # Allows manual trigger of the workflow      
+    - cron: '0 0 * * *' # Runs every day at midnight
+  workflow_dispatch:     # Allows manual trigger of the workflow     
 
 jobs:    
   ETL-pipeline:
